@@ -1,17 +1,17 @@
 library(ggplot2)
 library(sf)
 library(rworldmap)
+library(readxl)
+library(writexl)
 
 # read in map
 blankmap.sf <- read_sf("worldMap-Blank.gpkg")
 
+
+
 # make gradient 
-gradData.df <- read.csv("scaled_values.csv")
-gradData.df <- gradData.df[,2:ncol(gradData.df)]
+gradData.df <- read_excel("scaled_values.xlsx")
 
-# overlay on map 
+sPDF <- joinCountryData2Map(gradDataAll.df, joinCode = "NAME", nameJoinColumn)
 
-
-# make buttons
-# aggregate study info 
-# 
+#
