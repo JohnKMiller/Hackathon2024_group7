@@ -1,0 +1,14 @@
+"Cohort Name" "Sample Collection Location" "Ancestry" "Total N" "Cases" "Controls" "Male" "Female" "gradientValues"
+"1" "China Kadoorie Biobank" "China" "East Asian" 76679 6681 69998 NA NA 0.521914732615799
+"2" "Converge" "China" "East Asian" 10640 5303 5337 0 10640 0.072421037768256
+"3" "23andMe" "USA" "East Asian" 93039 2729 90310 36331 56708 0.633268884673005
+"4" "Taiwan Major Depressive Disorder study - Platform 1" "Taiwan" "East Asian" 7063 988 6075 1467 5596 0.0480742283606384
+"5" "Taiwan Major Depressive Disorder" "Taiwan" "East Asian" 2677 360 2317 NA NA 0.0182209697467689
+"6" "Woman's Health Initiative" "USA" "East Asian" 3007 454 2553 0 3007 0.0204671109557468
+"7" "Intern Health Study" "USA" "East Asian" 838 294 544 379 459 0.00570383737310137
+"8" "UK Biobank" "UK" "East Asian" 499 133 366 139 360 0.00339643776751501
+"9" "Army STARRS" "USA" "East Asian" 516 74 442 450 66 0.00351214807221993
+"10" "BioMe" "USA" "East Asian" 895 60 835 NA NA 0.00609180721828845
+"11" "23andMe_307k" "USA" "European" 307354 75607 231747 159824 147530 2.09200147013389
+"12" "UK Biobank" "UK" "European" 361315 127552 233763 166205 195110 2.45928639673284
+"13" "PGC_139k" "Germany, Australia, Switzerland, Scotland, USA, Europe, Netherlands, UK, Ireland, Denmark, Sweden, Iceland" "European" 138884 43204 95680 NA NA 0.945312350508127
