@@ -1,4 +1,5 @@
 library(readxl)
+library(writexl)
 # Load data
 Depression.df <- read_excel("MajorDepression_Data.xlsx")
 
@@ -15,3 +16,4 @@ Depression.df$gradientValues <- ScaledDepression.df
 #export
 
 write.csv(Depression.df, file = "scaled_values.csv")
+write_xlsx(Depression.df, "scaled_values.xlsx")
