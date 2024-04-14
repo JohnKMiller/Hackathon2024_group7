@@ -117,4 +117,16 @@ pie(pie_data)
 ```
 
 # Bar Graph
+```{r}
+#| eval: true
+#| echo: false
+data.df <- read_excel(pathway1)
+Countries_data <- cbind(data.df[,c(1,4:6)])
+b <- rep(Countries_data$`Cohort Name`, 3)
+c <- c(Countries_data$`Total N`, Countries_data$Cases, Countries_data$Controls)
+country_data_new <- cbind(b, c)
+totals <- rep(c("Total","Depressed","Control"), nrow(Countries_data))
 
+ggplot(country_data_new, aes(fill=totals, y=c, x=b)) + 
+  geom_bar(position="dodge", stat="identity")
+```
