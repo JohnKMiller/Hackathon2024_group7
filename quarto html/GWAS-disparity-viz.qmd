@@ -1,0 +1,120 @@
+---
+title: GWAS Disparity Data Vizualization
+format:
+    html:
+            theme: cosmos
+            toc: true
+            embed-resources: true
+            copy-code: true
+            css: | 
+            header {text-align: left;}
+            .figure {margin: 0;}
+---
+```{r}
+#| eval: true
+#| echo: false
+
+pathway1 = "c:/projects/Hackathon2024_group7/quarto html/data.xlsx"
+pathway2 = "c:/projects/Hackathon2024_group7/quarto html/MajorDepression_data.xlsx"
+
+```
+
+# Map Display
+```{r plot, warning=FALSE,message=FALSE,fig.width = 12, fig.height = 10, fig.margin=c(0, 0, 0, 0)}
+#| eval: true
+#| echo: false
+# https://r-spatial.org/r/2018/10/25/ggplot2-sf.html
+
+library(readxl)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(ggplot2)
+library(sf)
+
+# read in data
+data.df <- read_excel("MajorDepression_Data.xlsx")
+# get gradients
+data.df$gradients <- scale(data.df$`Total N`)
+data.df_new <- data.frame(cbind(data.df$`Sample Collection Location`, data.df$`Total N`, data.df$gradients))
+colnames(data.df_new) <- colnames(data.df[,c(2,4,9)])
+# get max for each country and corresponding gradient as new df
+world.df <- ne_countries(scale = "medium", returnclass = 'sf')
+world_data_requisite <- data.frame(world.df$name_long)
+gradients <- data.frame(cbind(world.df$name_long, numeric(length = nrow(world.df))))
+colnames(gradients) <- c("country", "gradient")
+
+for(i in 1:nrow(world.df)) {
+  for(j in 1:nrow(data.df_new)) {
+    if(world_data_requisite[i, 'world.df.name_long'] == data.df_new[j, 'Sample Collection Location']) {
+      holder <- 0
+      if (data.df_new[j, 'Total N'] > holder) {
+        holder <- data.df_new[j, 'Total N']
+        a <- world_data_requisite[i,]
+        gradients[i, 2] <- abs(data.df[j, 'gradients'])
+      }
+      else {
+        a <- world_data_requisite[i,]
+        gradients[i, 2] <- 0
+      }
+    }
+  }
+}
+
+N_studies <- c(gradients$gradient)
+ggplot(data = world.df) +
+  geom_sf(aes(fill = N_studies))
+```
+
+
+# Overview of Studies
+```{r html_table, output="asis"}
+#| eval: true
+#| echo: false
+library(readxl)
+# Read Excel file
+  df <- read_excel(pathway1)
+  
+  # Initialize HTML string
+  html_tables <- ""
+  
+  # Loop through each row
+  for (i in 1:nrow(df)) {
+    # Start table with Bootstrap styling
+    html_table <- "<div class='table-responsive'><table class='table table-striped'>"
+    
+    # Add table headers
+    html_table <- paste0(html_table, "<thead><tr>")
+    for (col_name in colnames(df)) {
+      html_table <- paste0(html_table, "<th>", col_name, "</th>")
+    }
+    html_table <- paste0(html_table, "</tr></thead>")
+    
+    # Add table body with row data
+    html_table <- paste0(html_table, "<tbody><tr>")
+    for (value in df[i,]) {
+      html_table <- paste0(html_table, "<td>", value, "</td>")
+    }
+    html_table <- paste0(html_table, "</tr></tbody>")
+    
+    # End table
+    html_table <- paste0(html_table, "</table></div>")
+    
+    html_table <- paste0("\n## ", sprintf("Study Number %s",i), "\n", html_table)
+
+   # Add current table to the HTML string
+    html_tables <- paste0(html_tables, html_table)
+  } 
+  cat(html_tables)
+```
+
+# Pie Chart
+```{r}
+#| eval: true
+#| echo: false
+data.df <- read_excel(pathway1)
+pie_data <- table(data.df$Ancestry)
+pie(pie_data)
+```
+
+# Bar Graph
+

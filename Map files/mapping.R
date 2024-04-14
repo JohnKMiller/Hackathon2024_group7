@@ -4,6 +4,7 @@ library(rworldmap)
 library(readxl)
 library(writexl)
 
+
 # read in map
 blankmap.sf <- read_sf("worldMap-Blank.gpkg")
 
@@ -14,4 +15,6 @@ gradData.df <- read_excel("scaled_values.xlsx")
 
 sPDF <- joinCountryData2Map(gradDataAll.df, joinCode = "NAME", nameJoinColumn)
 
-#
+# Country list
+
+  
